@@ -4,6 +4,7 @@ KEY = None
 isEncrypted = False
 LE = None
 RE = None
+LAYERS_COUNT = 0
 def func(RE,KEY):# using OR
     data = []
     for i in range(len(RE)):
@@ -31,7 +32,8 @@ def binary_to_string(binary_string):
 
 
 def encryption():
-    global isEncrypted, LE, RE,KEY
+    global isEncrypted, LE, RE, KEY, LAYERS_COUNT
+    LAYERS_COUNT += 1
     isEncrypted = True
     newLE = RE[:] #this is the final LE
     newRE = []
@@ -43,12 +45,14 @@ def encryption():
     encrypted_message = "".join(map(str,newLE + newRE))
     enc = binary_to_string(encrypted_message)
     print(f"Encrypted message: {enc}")
+    print(f"Current Layer : {LAYERS_COUNT}")
     LE = newLE[:]
     RE = newRE[:]
     return
 
 def decryption():
-    global RE, LE, KEY
+    global RE, LE, KEY, LAYERS_COUNT
+    LAYERS_COUNT -= 1
     newRE = LE[:]
     newLE = []
     modifiedLE = func(LE,KEY)
@@ -56,9 +60,10 @@ def decryption():
     for i in range(len(RE)):
         newLE.append(RE[i] ^ modifiedLE[i])
 
-    encrypted_message = "".join(map(str,newLE + newRE))
-    dyc = binary_to_string(encrypted_message)
+    decrypted_message = "".join(map(str,newLE + newRE))
+    dyc = binary_to_string(decrypted_message)
     print(f"Decrypted Message : {dyc}")
+    print(f"Current Layer is : {LAYERS_COUNT}")
     return
 
 def string_to_bits_bytearray(text, encoding='utf-8'):
@@ -106,3 +111,4 @@ def main():
 if __name__ == '__main__':
 
     main()
+
