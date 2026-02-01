@@ -4,15 +4,12 @@ KEY = None
 isEncrypted = False
 LE = None
 RE = None
-def func(RE,KEY):# using &
+def func(RE,KEY):# using OR
     data = []
     for i in range(len(RE)):
         data.append(RE[i] | KEY[i])
     return data
-    # & -> 6
-    # | -> 12
-    # ^ -> 3
-    # not& -> 12
+    
 def clearAll():
     global isEncrypted,LE,RE,KEY
     isEncrypted = False
@@ -107,4 +104,5 @@ def main():
 
 
 if __name__ == '__main__':
+
     main()
