@@ -38,7 +38,7 @@ Examples of real-world block ciphers include **AES** and **DES**.
 7. Combine blocks to produce ciphertext
 8. Reverse the steps to decrypt the message
 
-This project implements a **single-round Feistel-like block cipher**.
+This project implements a **multi-round Feistel-like block cipher**.
 
 ---
 
@@ -50,6 +50,7 @@ KEY = None
 LE = None
 RE = None
 isEncrypted = False
+LAYERS_COUNT = 0
 ```
 
 LE → Left half of the block
@@ -59,6 +60,8 @@ RE → Right half of the block
 KEY → Secret key (bit array)
 
 isEncrypted → Prevents decryption before encryption
+
+LAYERS_COUNT → Keep track of the current layers
 
 ### 2. String to Binary Conversion
 ```python
@@ -167,8 +170,6 @@ Educational clarity
 
 This cipher is not secure for real applications due to:
 
-Single encryption round
-
 Non-standard key generation
 
 No padding or fixed block size
@@ -176,8 +177,6 @@ No padding or fixed block size
 No cryptographic randomness
 
 ## 🚀 Future Enhancements
-
-Multiple encryption rounds
 
 Secure key scheduling
 
